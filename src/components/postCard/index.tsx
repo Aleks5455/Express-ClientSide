@@ -95,12 +95,28 @@ export const PostCard: React.FC<Props> = ({
           navigate("/")
           break
         case "comment":
-          await deleteComment(id).unwrap()
+          await deleteComment(commentId).unwrap()
           refetchPosts()
           break
         default:
           throw new Error("Wrong argument")
       }
+    } catch (error) {
+      if (errorCheck(error)) {
+        setError(error.data.error)
+      } else {
+        setError(error as string)
+      }
+    }
+  }
+
+  const handleLike = async () => {
+    try {
+      likedByUser
+        ? await unlikePost(id).unwrap()
+        : await likePost({ postId: id }).unwrap()
+
+      await triggerGetPostById(id).unwrap()
     } catch (error) {
       if (errorCheck(error)) {
         setError(error.data.error)
@@ -138,9 +154,9 @@ export const PostCard: React.FC<Props> = ({
       </CardBody>
 
       {cardFor !== "comment" && (
-        <CardFooter className="gap-3 ">
+        <CardFooter className="gap-3 h-11">
           <div className="flex gap-5 items-center">
-            <div>
+            <div onClick={handleLike}>
               <MetaInfo
                 count={likesCount}
                 Icon={likedByUser ? FcDislike : MdOutlineFavoriteBorder}
