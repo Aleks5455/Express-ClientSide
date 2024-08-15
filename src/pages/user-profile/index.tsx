@@ -22,6 +22,7 @@ import { CiEdit } from "react-icons/ci"
 import { ProfileInfo } from "../../components/profile-info"
 import { formatDate } from "../../utils/formatDate"
 import { CountInfo } from "../../components/count-info"
+import { EditProfile } from "../../components/editProfile"
 
 export const UserProfile = () => {
   const { id } = useParams<{ id: string }>()
@@ -50,8 +51,18 @@ export const UserProfile = () => {
         await triggerCurrent()
       }
     } catch (error) {
-      console.log("asd");
-      
+      console.log("asd")
+    }
+  }
+  const handleClose = async () => {
+    try {
+      if (id) {
+        await triggerGetUserById(id)
+        await triggerCurrent()
+        onClose()
+      }
+    } catch (error) {
+      console.error(error)
     }
   }
 
@@ -88,7 +99,9 @@ export const UserProfile = () => {
                 {data.isFollowing ? "Unfollow" : "Follow"}
               </Button>
             ) : (
-              <Button endContent={<CiEdit />}>Edit</Button>
+              <Button endContent={<CiEdit />} onClick={() => onOpen()}>
+                Edit
+              </Button>
             )}
           </div>
         </Card>
@@ -104,6 +117,7 @@ export const UserProfile = () => {
           </div>
         </Card>
       </div>
+      <EditProfile isOpen={isOpen} onClose={handleClose} user={data} />
     </>
   )
 }
