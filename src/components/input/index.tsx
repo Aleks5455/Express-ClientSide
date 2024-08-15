@@ -1,5 +1,5 @@
 import { Input as NextUIInput } from "@nextui-org/react"
-import React from "react"
+import type React from "react"
 import { useController, type Control } from "react-hook-form"
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const Input: React.FC<Props> = ({
-  name,
+  name, 
   label,
   placeholder,
   type,

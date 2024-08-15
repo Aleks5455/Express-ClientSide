@@ -10,7 +10,7 @@ export const Posts = () => {
       <div className="mb-10 w-full flex">
         <CreatePost />
       </div>
-      <div className="w-full">
+      <div>
         {data && data.length > 0
           ? data.map(
               ({

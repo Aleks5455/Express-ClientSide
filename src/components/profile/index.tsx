@@ -1,4 +1,3 @@
-import React from "react"
 import { useAppSelector } from "../../app/hooks"
 import { selectCurrent } from "../../features/user/userSlice"
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react"
@@ -17,7 +16,7 @@ export const Profile = () => {
 
   return (
     <Card className="py-4 w-[302px]">
-      <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
+      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
         <Image
           src={`${BASE_URL}${avatarUrl}`}
           alt="cardProfile"
@@ -25,7 +24,7 @@ export const Profile = () => {
           width={370}
         />
       </CardHeader>
-      <CardBody>
+      <CardBody className="overflow-visible py-2">
         <Link to={`/users/${id}`}>
           <h4 className="font-bold text-large mb-2">{name}</h4>
         </Link>

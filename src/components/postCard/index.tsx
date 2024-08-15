@@ -117,6 +117,7 @@ export const PostCard: React.FC<Props> = ({
         : await likePost({ postId: id }).unwrap()
 
       await triggerGetPostById(id).unwrap()
+      await refetchPosts()
     } catch (error) {
       if (errorCheck(error)) {
         setError(error.data.error)
@@ -127,7 +128,7 @@ export const PostCard: React.FC<Props> = ({
   }
 
   return (
-    <Card className="mb-5 max-w-full">
+    <Card className="mb-5">
       <CardHeader className="justify-between items-center bg-transparent">
         <Link to={`/users/${authorId}`}>
           <User
