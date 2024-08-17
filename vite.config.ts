@@ -13,4 +13,8 @@ export default defineConfig({
     setupFiles: "src/setupTests",
     mockReset: true,
   },
+  build: {
+    outDir: "build",
+    sourcemap: true,
+  },
 })
